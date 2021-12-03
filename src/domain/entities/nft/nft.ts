@@ -22,7 +22,8 @@ export class NFT {
   public readonly quantity: Quantity
   public readonly price: Price
 
-  private constructor (art: Art,
+  private constructor (
+    art: Art,
     artistName: ArtistName,
     name: Name,
     description: Description,
