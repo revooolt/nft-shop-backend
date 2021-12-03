@@ -98,7 +98,7 @@ describe('Add NFT Controller', () => {
     expect(httpResponse).toEqual(badRequest(new MissingParamError('quantity')))
   })
 
-  test('should return 400 if no name is provided', async () => {
+  test('should return 400 if no price is provided', async () => {
     const { sut } = makeSut()
     const httpRequest = {
       art: {
