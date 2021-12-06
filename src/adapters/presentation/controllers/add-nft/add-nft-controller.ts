@@ -2,9 +2,9 @@
 import { AddNFT } from '../../../../usecases/add-nft-to-nft-shop/protocols/add-nft'
 import { AddNFTResponse } from '../../../../usecases/add-nft-to-nft-shop/protocols/add-nft-response'
 import { MissingParamError } from '../errors/missing-param-error'
-import { badRequest } from '../helpers/http-helper'
+import { badRequest, ok } from '../helpers/http-helper'
 import { Controller } from '../ports/controller'
-import { HttpRequest } from '../ports/http'
+import { HttpRequest, HttpResponse } from '../ports/http'
 
 export class AddNFTController implements Controller {
   private readonly addNFT: AddNFT
@@ -13,7 +13,7 @@ export class AddNFTController implements Controller {
     this.addNFT = addNFT
   }
 
-  async handle (httpRequest: HttpRequest): Promise<any> {
+  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     const requiredFields = ['artistName', 'name', 'description', 'quantity', 'price']
     for (const field of requiredFields) {
       if (!httpRequest.body[field] && httpRequest.body[field] !== 0) {
@@ -35,5 +35,6 @@ export class AddNFTController implements Controller {
     if (addNFTResponse.isLeft()) {
       return badRequest(addNFTResponse.value)
     }
+    return ok(nftData)
   }
 }
