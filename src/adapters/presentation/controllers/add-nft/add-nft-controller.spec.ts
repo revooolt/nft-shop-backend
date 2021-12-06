@@ -10,7 +10,21 @@ import { AddNFT } from '../../../../usecases/add-nft-to-nft-shop/protocols/add-n
 import { AddNFTResponse } from '../../../../usecases/add-nft-to-nft-shop/protocols/add-nft-response'
 import { MissingParamError } from '../errors/missing-param-error'
 import { badRequest } from '../helpers/http-helper'
+import { HttpRequest } from '../ports/http'
 import { AddNFTController } from './add-nft-controller'
+
+const makeFakeNFTRequest = (): HttpRequest => ({
+  art: {
+    filename: 'nft_art.png'
+  },
+  body: {
+    artistName: 'artist_name',
+    name: 'art_name',
+    description: 'description_text',
+    quantity: 1,
+    price: 1
+  }
+})
 
 const makeAddNFT = (): AddNFT => {
   class AddNFTStub implements AddNFT {
@@ -355,5 +369,15 @@ describe('Add NFT Controller', () => {
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new InvalidPriceError(httpRequest.body.price).message)
+  })
+
+  test('should call AddNFT with correct values', async () => {
+    const { sut, addNFTStub } = makeSut()
+    const addNFTSpy = jest.spyOn(addNFTStub, 'addNFTToNFTShop')
+    await sut.handle(makeFakeNFTRequest())
+    expect(addNFTSpy).toHaveBeenCalledWith({
+      ...makeFakeNFTRequest().body,
+      art: makeFakeNFTRequest().art.filename
+    })
   })
 })
