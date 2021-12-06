@@ -14,7 +14,6 @@ export class AddNFTController implements Controller {
   }
 
   async handle (httpRequest: HttpRequest): Promise<any> {
-    console.log(httpRequest)
     const requiredFields = ['artistName', 'name', 'description', 'quantity', 'price']
     for (const field of requiredFields) {
       if (!httpRequest.body[field] && httpRequest.body[field] !== 0) {
