@@ -9,9 +9,18 @@ import { left, right } from '../../../../shared/either'
 import { AddNFT } from '../../../../usecases/add-nft-to-nft-shop/protocols/add-nft'
 import { AddNFTResponse } from '../../../../usecases/add-nft-to-nft-shop/protocols/add-nft-response'
 import { MissingParamError } from '../errors/missing-param-error'
-import { badRequest } from '../helpers/http-helper'
+import { badRequest, ok } from '../helpers/http-helper'
 import { HttpRequest } from '../ports/http'
 import { AddNFTController } from './add-nft-controller'
+
+const makeFakeNFTData = (): NFTData => ({
+  art: 'nft_art.png',
+  artistName: 'artist_name',
+  name: 'art_name',
+  description: 'description_text',
+  quantity: 1,
+  price: 1
+})
 
 const makeFakeNFTRequest = (): HttpRequest => ({
   art: {
@@ -379,5 +388,11 @@ describe('Add NFT Controller', () => {
       ...makeFakeNFTRequest().body,
       art: makeFakeNFTRequest().art.filename
     })
+  })
+
+  test('should return 200 on success', async () => {
+    const { sut } = makeSut()
+    const httpResponse = await sut.handle(makeFakeNFTRequest())
+    expect(httpResponse).toEqual(ok(makeFakeNFTData()))
   })
 })
