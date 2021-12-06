@@ -9,7 +9,7 @@ import { left, right } from '../../../../shared/either'
 import { AddNFT } from '../../../../usecases/add-nft-to-nft-shop/protocols/add-nft'
 import { AddNFTResponse } from '../../../../usecases/add-nft-to-nft-shop/protocols/add-nft-response'
 import { MissingParamError } from '../errors/missing-param-error'
-import { badRequest, ok } from '../helpers/http-helper'
+import { badRequest, ok, serverError } from '../helpers/http-helper'
 import { HttpRequest } from '../ports/http'
 import { AddNFTController } from './add-nft-controller'
 
@@ -394,5 +394,14 @@ describe('Add NFT Controller', () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(makeFakeNFTRequest())
     expect(httpResponse).toEqual(ok(makeFakeNFTData()))
+  })
+
+  test('should return 500 if AddNFT throws', async () => {
+    const { sut, addNFTStub } = makeSut()
+    jest.spyOn(addNFTStub, 'addNFTToNFTShop').mockImplementationOnce(() => {
+      throw new Error()
+    })
+    const httpResponse = await sut.handle(makeFakeNFTRequest())
+    expect(httpResponse).toEqual(serverError())
   })
 })
