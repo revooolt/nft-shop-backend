@@ -5,6 +5,7 @@
   "author": "Gabriel Airton <gabrielrevooolt@hotmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@types/express": "^4.17.13",
     "@types/jest": "^27.0.3",
     "@typescript-eslint/eslint-plugin": "^4.0.1",
     "eslint": "^7.12.1",
@@ -16,10 +17,12 @@
     "husky": "^7.0.4",
     "jest": "^27.3.1",
     "lint-staged": "^12.1.2",
+    "sucrase": "^3.20.3",
     "ts-jest": "^27.0.7",
     "typescript": "^4"
   },
   "scripts": {
+    "start": "sucrase-node src/main/server.ts",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:unit": "yarn test --watch -c jest-unit-config.js",
@@ -28,6 +31,7 @@
     "test:ci": "yarn test --coverage"
   },
   "dependencies": {
+    "express": "^4.17.1",
     "pg": "^8.7.1",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.41"
