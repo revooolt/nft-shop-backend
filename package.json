@@ -28,6 +28,7 @@
     "test:ci": "yarn test --coverage"
   },
   "dependencies": {
+    "pg": "^8.7.1",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.41"
   }
