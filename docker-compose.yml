@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+  database_nft-shop:
+    image: postgres
+    container_name: database_nft-shop
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=nft
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_DB=nft-shop
+    volumes:
+    - pgdata:/data/postgres
+  app:
+    build: .
+    container_name: nft-shop
+    ports:
+    - 5050:5050
+    volumes:
+      - .:/usr/app/
+    links: 
+      - database_nft-shop
+    depends_on: 
+      - database_nft-shop
+    
+
+volumes:
+  pgdata:
+    driver: local

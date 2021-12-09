@@ -1,0 +1,8 @@
+{
+  "type": "postgres",
+  "port": 5432,
+  "host": "localhost",
+  "username": "nft",
+  "password": "123",
+  "database": "nft-shop"
+}
