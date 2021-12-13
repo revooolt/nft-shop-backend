@@ -1,11 +1,8 @@
-import { Column, CreateDateColumn, Entity } from 'typeorm'
+import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm'
 
 @Entity('nfts')
 export class NFT {
-  @Column()
-  art: string
-
-  @Column()
+  @PrimaryColumn()
   name: string
 
   @Column()
