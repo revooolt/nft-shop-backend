@@ -6,6 +6,7 @@
     "esModuleInterop": true,
     "allowJs": true,
     "strictNullChecks": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   }
 }
