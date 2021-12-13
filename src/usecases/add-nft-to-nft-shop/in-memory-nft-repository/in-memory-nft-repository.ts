@@ -24,10 +24,11 @@ export class InMemoryNFTRepository implements NFTRepository {
     return true
   }
 
-  async add (nft: NFTData): Promise<void> {
+  async add (nft: NFTData): Promise<NFTData> {
     const exists = await this.exists(nft.name)
     if (!exists) {
       this.nfts.push(nft)
     }
+    return nft
   }
 }
