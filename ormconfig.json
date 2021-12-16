@@ -5,7 +5,7 @@
   "username": "nft",
   "password": "123",
   "database": "nft-shop",
-  "entities": ["./src/external/db/postgresql/orm/typeorm/entities/*.ts"],
+  "entities": ["./src/external/db/postgresql/orm/typeorm/entities"],
   "migrations": ["./src/external/db/postgresql/orm/typeorm/migrations/*.ts"],
   "cli": {
     "migrationsDir": "./src/external/db/postgresql/orm/typeorm/migrations"
