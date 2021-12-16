@@ -2,8 +2,21 @@
 import request from 'supertest'
 import app from '../config/app'
 import path from 'path'
+import { TypeORMHelper } from '../../external/db/postgresql/orm/typeorm/helper'
 
 describe('NFT Routes', () => {
+  beforeAll(async () => {
+    await TypeORMHelper.instance.connect()
+  })
+
+  beforeEach(async () => {
+    await TypeORMHelper.instance.deleteFrom('nfts')
+  })
+
+  afterAll(async () => {
+    await TypeORMHelper.instance.disconnect()
+  })
+
   test('should return an NFT on success', async () => {
     await request(app)
       .post('/api/nft')
