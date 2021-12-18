@@ -7,7 +7,6 @@ export class Description {
 
   private constructor (description: string) {
     this.description = description
-    Object.freeze(this)
   }
 
   static create (description: string): Either<InvalidDescriptionError, Description> {

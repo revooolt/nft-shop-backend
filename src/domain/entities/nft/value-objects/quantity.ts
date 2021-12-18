@@ -7,7 +7,6 @@ export class Quantity {
 
   private constructor (quantity: number) {
     this.quantity = quantity
-    Object.freeze(this)
   }
 
   static create (quantity: number): Either<InvalidQuantityError, Quantity> {

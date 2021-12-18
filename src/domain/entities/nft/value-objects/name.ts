@@ -7,7 +7,6 @@ export class Name {
 
   private constructor (name: string) {
     this.name = name
-    Object.freeze(this)
   }
 
   static create (name: string): Either<InvalidNameError, Name> {

@@ -6,7 +6,6 @@ export class Art {
 
   private constructor (art: string) {
     this.art = art
-    Object.freeze(this)
   }
 
   static create (art: string): Either<InvalidArtError, Art> {

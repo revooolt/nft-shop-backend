@@ -7,7 +7,6 @@ export class ArtistName {
 
   private constructor (artistName: string) {
     this.artistName = artistName
-    Object.freeze(this)
   }
 
   static create (artistName: string): Either<InvalidArtistNameError, ArtistName> {

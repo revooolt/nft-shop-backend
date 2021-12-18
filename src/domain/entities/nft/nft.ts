@@ -36,7 +36,6 @@ export class NFT {
     this.description = description
     this.quantity = quantity
     this.price = price
-    Object.freeze(this)
   }
 
   static create (nftData: NFTData): Either<

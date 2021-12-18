@@ -7,7 +7,6 @@ export class Price {
 
   private constructor (price: number) {
     this.price = price
-    Object.freeze(this)
   }
 
   static create (price: number): Either<InvalidPriceError, Price> {
