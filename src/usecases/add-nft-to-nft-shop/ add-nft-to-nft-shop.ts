@@ -40,7 +40,7 @@ export class AddNFTToNFTShop implements AddNFT {
         artistName: nft.artistName.value,
         description: nft.description.value,
         quantity: nft.quantity.value,
-        price: nft.quantity.value
+        price: nft.price.value
       })
     }
     return right(nftData)
